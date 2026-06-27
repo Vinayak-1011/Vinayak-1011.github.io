@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinayak B — Cybersecurity & GRC</title>
+  <meta name="description" content="Cybersecurity professional & software developer specializing in GRC, SecOps, and compliance automation at Raksha Technologies." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="section-glow" aria-hidden="true"></div>
+
+  <!-- ===== Preloader ===== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <p class="preloader__label">Initializing</p>
+      <div class="preloader__bar-track">
+        <div class="preloader__bar" id="preloader-bar"></div>
+      </div>
+      <span class="preloader__count" id="preloader-count">0</span>
+    </div>
+    <div class="preloader__name">VINAYAK</div>
+  </div>
+
+  <!-- ===== Overlays ===== -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- ===== Cursor ===== -->
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand"><span class="nav__cursor">_</span>V</a>
+    <nav class="nav__links" id="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <span class="nav__status">
+        <span class="nav__dot"></span>
+        Available
+      </span>
+      <a class="btn-sm" href="assets/resume.pdf" download>Resume</a>
+      <button class="nav__burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="top">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero__overlay" aria-hidden="true"></div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow">
+        <span class="hero__prompt">&gt;</span>
+        <span class="hero__cmd">hello_world.sh</span>
+        <span class="blink-cursor">|</span>
+      </p>
+      <div class="hero__name-clip">
+        <h1 class="hero__name" id="hero-name" aria-label="Vinayak">VINAYAK</h1>
+      </div>
+      <div class="hero__role">
+        <span class="hero__role-prefix">_&nbsp;</span>
+        <span id="typewriter" class="hero__role-text"></span>
+        <span class="blink-cursor hero__role-cursor">█</span>
+      </div>
+      <p class="hero__desc">
+        Cybersecurity professional & software developer at the intersection of GRC, SecOps, and code.<br>
+        I build compliance tools that account for how security teams actually operate.
+      </p>
+      <div class="hero__actions">
+        <a href="#projects" class="btn-primary">
+          View Work
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+      <div class="hero__socials">
+        <a href="https://github.com/Vinayak-1011" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/vinayak-b-77a999277" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/vinxyxk.__" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="tel:+919962102414" aria-label="Phone">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .99h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </a>
+        <a href="mailto:vinayakbala32@gmail.com" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__corner hero__corner--bl">001</div>
+    <div class="hero__corner hero__corner--br">
+      <span>Scroll</span>
+      <div class="hero__scrollline"></div>
+    </div>
+  </section>
+
+  <!-- ===== Marquee ===== -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee">
+      <div class="marquee__track">
+        <span>CYBERSECURITY</span><span class="marquee__sep">✦</span>
+        <span>GRC & COMPLIANCE</span><span class="marquee__sep">✦</span>
+        <span>SOC OPERATIONS</span><span class="marquee__sep">✦</span>
+        <span>SECURE SOFTWARE</span><span class="marquee__sep">✦</span>
+        <span>ETHICAL HACKING</span><span class="marquee__sep">✦</span>
+        <span>OPEN TO OPPORTUNITIES</span><span class="marquee__sep">✦</span>
+        <span>CYBERSECURITY</span><span class="marquee__sep">✦</span>
+        <span>GRC & COMPLIANCE</span><span class="marquee__sep">✦</span>
+        <span>SOC OPERATIONS</span><span class="marquee__sep">✦</span>
+        <span>SECURE SOFTWARE</span><span class="marquee__sep">✦</span>
+        <span>ETHICAL HACKING</span><span class="marquee__sep">✦</span>
+        <span>OPEN TO OPPORTUNITIES</span><span class="marquee__sep">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ===== About ===== -->
+    <section class="section about-section" id="about">
+      <div class="section__label">01 — About</div>
+      <div class="about-grid">
+        <div class="about-left">
+          <h2 class="about-heading">
+            <span class="about-heading__line"><em>Securing</em> systems,</span>
+            <span class="about-heading__line">one line of <em>code</em></span>
+            <span class="about-heading__line">at a time.</span>
+          </h2>
+        </div>
+        <div class="about-right">
+          <p class="about-bio">
+            I'm a final-year B.Tech CSE student at VIT and a Cybersecurity
+            professional at Raksha Technologies, working at the intersection of
+            Security Operations, GRC, and Software Development. My experience
+            spans the full security lifecycle — from triaging real-time SOC
+            alerts to architecting compliance automation software.
+          </p>
+          <p class="about-bio">
+            I've worked hands-on with SIEM/SOAR platforms like IBM QRadar,
+            Securonix, and FortiSoar, and I build tools that account for how
+            security teams actually operate on the ground. Heading to Monash
+            University (Class of 2027) for my Master's in Cybersecurity.
+          </p>
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat__row">
+                <span class="stat__num" data-target="1">0</span>
+                <span class="stat__plus">+</span>
+              </div>
+              <span class="stat__label">Years exp.</span>
+            </div>
+            <div class="stat">
+              <div class="stat__row">
+                <span class="stat__num" data-target="10">0</span>
+                <span class="stat__plus">+</span>
+              </div>
+              <span class="stat__label">Projects</span>
+            </div>
+            <div class="stat">
+              <div class="stat__row">
+                <span class="stat__num" data-target="15">0</span>
+                <span class="stat__plus">+</span>
+              </div>
+              <span class="stat__label">Technologies</span>
+            </div>
+          </div>
+          <div class="about-details">
+            <div class="about-detail">
+              <span>Location</span><strong>Chennai, India</strong>
+            </div>
+            <div class="about-detail">
+              <span>Focus</span><strong>GRC & Cybersecurity</strong>
+            </div>
+            <div class="about-detail">
+              <span>Education</span><strong>B.Tech CSE @ VIT '26</strong>
+            </div>
+            <div class="about-detail">
+              <span>Email</span>
+              <strong><a href="mailto:vinayakbala32@gmail.com">vinayakbala32@gmail.com</a></strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="section skills-section" id="skills">
+      <div class="section__label">02 — Skills</div>
+      <div class="skills-grid">
+        <div class="terminal" id="terminal">
+          <div class="terminal__header">
+            <div class="terminal__dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="terminal__title">skills.sh — zsh</span>
+          </div>
+          <div class="terminal__body" id="terminal-body">
+            <div class="terminal__line">
+              <span class="t-prompt">vinayak@dev:~$</span>
+              <span class="t-cmd"> cat skills.json</span>
+            </div>
+          </div>
+        </div>
+        <div class="skills-tags">
+          <!-- PLACEHOLDER: update these -->
+          <div class="skills-group">
+            <h3>Languages</h3>
+            <ul class="tags">
+              <li>Python</li><li>JavaScript</li><li>SQL</li><li>Bash</li><li>HTML/CSS</li>
+            </ul>
+          </div>
+          <div class="skills-group">
+            <h3>Security & SIEM</h3>
+            <ul class="tags">
+              <li>IBM QRadar</li><li>Securonix</li><li>FortiSoar</li><li>MITRE ATT&amp;CK</li>
+            </ul>
+          </div>
+          <div class="skills-group">
+            <h3>GRC & Compliance</h3>
+            <ul class="tags">
+              <li>SOC 2</li><li>ISO 27001</li><li>Compliance Automation</li><li>Risk Assessment</li>
+            </ul>
+          </div>
+          <div class="skills-group">
+            <h3>Tools & Dev</h3>
+            <ul class="tags">
+              <li>Git</li><li>Linux</li><li>Docker</li><li>React</li><li>FastAPI</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section class="section exp-section" id="experience">
+      <div class="section__label">03 — Experience</div>
+      <div class="timeline">
+        <article class="job">
+          <div class="job__left">
+            <span class="job__date">Jan 2026 — Present</span>
+          </div>
+          <div class="job__right">
+            <div class="job__header">
+              <h3>GRC Intern & Software Developer</h3>
+              <span class="job__co">Raksha Technologies</span>
+            </div>
+            <p>Participating in high-stakes compliance audits while simultaneously building custom software to automate GRC workflows.</p>
+            <ul>
+              <li>Contribute to SOC 2 audits — control reviews, evidence collection, and gap analysis.</li>
+              <li>Build Python-based automation tools for firewall reviews and centralized approval workflows.</li>
+              <li>Develop full-stack compliance software that streamlines the auditing lifecycle end-to-end.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job__left">
+            <span class="job__date">Jun 2025 — Aug 2025</span>
+          </div>
+          <div class="job__right">
+            <div class="job__header">
+              <h3>SOC Analyst Intern</h3>
+              <span class="job__co">Noventiq</span>
+            </div>
+            <p>Gained hands-on experience in real-time threat monitoring and incident response within an enterprise Security Operations Centre.</p>
+            <ul>
+              <li>Analyzed security logs and triaged alerts using IBM QRadar and Securonix SIEM platforms.</li>
+              <li>Correlated security events using the MITRE ATT&amp;CK framework to identify and escalate incidents.</li>
+              <li>Supported the SOC team in investigating offences and documenting incident response workflows.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job__left">
+            <span class="job__date">Sep 2023 — Nov 2025</span>
+          </div>
+          <div class="job__right">
+            <div class="job__header">
+              <h3>Web Developer</h3>
+              <span class="job__co">CodeChef VIT-Chennai Chapter</span>
+            </div>
+            <p>Built and maintained the chapter's web presence for 2+ years, shipping event pages and registration systems for a 500+ member community.</p>
+            <ul>
+              <li>Developed interactive event landing pages and registration flows using modern web technologies.</li>
+              <li>Collaborated with a cross-functional team to deliver features on tight competition deadlines.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job__left">
+            <span class="job__date">Sep 2023 — Jun 2025</span>
+          </div>
+          <div class="job__right">
+            <div class="job__header">
+              <h3>Event Manager</h3>
+              <span class="job__co">CYSCOM VIT Chennai</span>
+            </div>
+            <p>Managed cybersecurity events and workshops for VIT's largest security-focused student community.</p>
+            <ul>
+              <li>Organized CTF competitions, security talks, and hands-on workshops for 1000+ attendees.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Projects (horizontal scroll) ===== -->
+    <section class="projects-section" id="projects">
+      <div class="projects-sticky">
+        <div class="section__label projects-section-label">04 — Work</div>
+        <div class="projects-track" id="projects-track">
+          <div class="projects-intro">
+            <h2 class="projects-intro__title">Selected<br>Work</h2>
+            <p class="projects-intro__sub">Things I've built</p>
+          </div>
+          <article class="project-card" data-index="01">
+            <div class="project-card__inner">
+              <div class="project-card__top">
+                <span class="project-card__num">01</span>
+                <a class="project-card__arrow" href="https://github.com/Vinayak-1011/Medical-AI-verifier" target="_blank" rel="noopener" aria-label="Open project">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </a>
+              </div>
+              <div class="project-card__body">
+                <h3>Medical AI Verifier</h3>
+                <p>Neuro-symbolic AI that verifies drug interactions, symptoms, and side effects by orchestrating Gemini LLM reasoning with a Neo4j knowledge graph — built to mitigate hallucinations in high-stakes medical AI.</p>
+              </div>
+              <ul class="tags">
+                <li>Python</li><li>Gemini 2.5</li><li>Neo4j</li><li>LangChain</li><li>Streamlit</li>
+              </ul>
+            </div>
+          </article>
+          <article class="project-card" data-index="02">
+            <div class="project-card__inner">
+              <div class="project-card__top">
+                <span class="project-card__num">02</span>
+                <a class="project-card__arrow" href="https://github.com/Vinayak-1011/Brain-tumor-detector" target="_blank" rel="noopener" aria-label="Open project">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </a>
+              </div>
+              <div class="project-card__body">
+                <h3>Brain Tumor Detector</h3>
+                <p>Deep learning model that classifies brain MRI scans into four categories — glioma, meningioma, pituitary tumor, or healthy — using convolutional neural networks trained on medical imaging data.</p>
+              </div>
+              <ul class="tags">
+                <li>Python</li><li>TensorFlow</li><li>CNN</li><li>Medical Imaging</li>
+              </ul>
+            </div>
+          </article>
+          <article class="project-card" data-index="03">
+            <div class="project-card__inner">
+              <div class="project-card__top">
+                <span class="project-card__num">03</span>
+                <a class="project-card__arrow" href="https://github.com/Vinayak-1011/ML-model-1" target="_blank" rel="noopener" aria-label="Open project">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </a>
+              </div>
+              <div class="project-card__body">
+                <h3>Harmful Object Classifier</h3>
+                <p>Binary ML classifier built in 48 hours at a make-a-thon to distinguish harmful from harmless objects — shipped from zero ML knowledge to a working model under competition pressure.</p>
+              </div>
+              <ul class="tags">
+                <li>Python</li><li>scikit-learn</li><li>ML</li><li>Hackathon</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-card" data-index="04">
+            <div class="project-card__inner">
+              <div class="project-card__top">
+                <span class="project-card__num">04</span>
+                <a class="project-card__arrow" href="https://github.com/Vinayak-1011/raksha-approval-tracker" target="_blank" rel="noopener" aria-label="Open project">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                </a>
+              </div>
+              <div class="project-card__body">
+                <h3>Raksha Approval Tracker</h3>
+                <p>Cross-platform approval workflow tool built at Raksha Technologies — integrates with Microsoft SharePoint to streamline document review and sign-off processes, deployable as a desktop app or Azure Static Web App.</p>
+              </div>
+              <ul class="tags">
+                <li>TypeScript</li><li>Vite</li><li>Tauri</li><li>SharePoint</li><li>Azure</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Education ===== -->
+    <section class="section edu-section" id="education">
+      <div class="section__label">05 — Education</div>
+      <div class="timeline">
+        <article class="job">
+          <div class="job__left"><span class="job__date">Sep 2022 — Sep 2026</span></div>
+          <div class="job__right">
+            <div class="job__header">
+              <h3>B.Tech, Computer Science & Engineering</h3>
+              <span class="job__co">Vellore Institute of Technology</span>
+            </div>
+            <p>Specializing in cybersecurity, distributed systems, and AI. Active in CYSCOM and CodeChef chapter. Research collaborations on secure IoT frameworks and medical AI safety.</p>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job__left"><span class="job__date">Apr 2021 — Apr 2022</span></div>
+          <div class="job__right">
+            <div class="job__header">
+              <h3>12th Grade, Computer Science</h3>
+              <span class="job__co">Maharishi Vidya Mandir Senior Secondary School</span>
+            </div>
+            <p>Higher secondary education with a focus on Computer Science and Mathematics.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Contact ===== -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <span class="contact-label">06 — Let's Connect</span>
+      <h2 class="contact-heading">
+        <span class="contact-heading__line">Got an idea?</span>
+        <span class="contact-heading__line">Let's <span class="contact-glitch" data-text="build it.">build it.</span></span>
+      </h2>
+      <a class="contact-cta" href="mailto:vinayakbala32@gmail.com">
+        <span>vinayakbala32@gmail.com</span>
+        <span class="contact-cta__arrow">→</span>
+      </a>
+      <div class="contact-links">
+        <a href="https://github.com/Vinayak-1011" target="_blank" rel="noopener">GitHub</a>
+        <span>/</span>
+        <a href="https://www.linkedin.com/in/vinayak-b-77a999277" target="_blank" rel="noopener">LinkedIn</a>
+        <span>/</span>
+        <a href="https://www.instagram.com/vinxyxk.__" target="_blank" rel="noopener">Instagram</a>
+        <span>/</span>
+        <a href="tel:+919962102414">+91 99621 02414</a>
+        <span>/</span>
+        <a href="mailto:vinayakbala32@gmail.com">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p class="footer__copy">&copy; <span id="year"></span> Vinayak. Crafted with intention.</p>
+    <a href="#top" class="footer__top">↑ Back to top</a>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
+  <script src="js/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
