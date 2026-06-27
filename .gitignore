@@ -1,0 +1,16 @@
+# Claude / local agent config and installed skills (do not publish)
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs / deps (if you add tooling later)
+node_modules/
+*.log
