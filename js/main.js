@@ -187,9 +187,9 @@ function initNav() {
 }
 
 /* ================================================================
-   3D SCENE — globe, arcs, rings, particles
+   3D SCENE — a continuous journey along -Z, one monument per section
    ================================================================ */
-const rig = { camX: 0, camY: 1.5, camZ: 26, gX: 9, gYr: 0, scale: 1, arcGlow: 1 };
+const rig = { x: 0, y: 2, z: 16, sway: 0, arcGlow: 1, beacon: 0 };
 let sceneAPI = null;
 
 function initScene3D(opts) {
@@ -198,10 +198,10 @@ function initScene3D(opts) {
   if (!canvas) return;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x04060c, 0.014);
+  scene.fog = new THREE.FogExp2(0x04060c, 0.016);
 
-  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 300);
-  camera.position.set(rig.camX, rig.camY, rig.camZ);
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 400);
+  camera.position.set(rig.x, rig.y, rig.z);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -212,9 +212,9 @@ function initScene3D(opts) {
   const AMBER = 0xffc857;
   const DEEP  = 0x0a3a55;
 
-  // ---- Globe group ----
+  // ---- 01 · GLOBE — hero / about ----
   const globe = new THREE.Group();
-  globe.position.set(rig.gX, 0, -4);
+  globe.position.set(8, 0, -14);
   scene.add(globe);
 
   const R = 7;
@@ -302,13 +302,107 @@ function initScene3D(opts) {
     arcs.push({ mat: m, phase: Math.random() * Math.PI * 2, speed: 0.28 + Math.random() * 0.5 });
   }
 
-  // ---- Ambient particle field ----
-  const PC = MOBILE ? 250 : 700;
+  // ---- Journey corridor: floor grids ----
+  function makeGrid(divs, colA, colB, opacity) {
+    const g = new THREE.GridHelper(640, divs, colA, colB);
+    (Array.isArray(g.material) ? g.material : [g.material]).forEach(m => {
+      m.transparent = true; m.opacity = opacity;
+    });
+    g.position.set(0, -7, -160);
+    return g;
+  }
+  scene.add(makeGrid(128, CYAN, 0x0a1a2a, 0.13));
+  scene.add(makeGrid(48, DEEP, 0x081420, 0.22));
+
+  // shared wire materials for monuments
+  const wCyan  = new THREE.MeshBasicMaterial({ color: CYAN,  wireframe: true, transparent: true, opacity: 0.16 });
+  const wDeep  = new THREE.MeshBasicMaterial({ color: DEEP,  wireframe: true, transparent: true, opacity: 0.4 });
+  const wAmber = new THREE.MeshBasicMaterial({ color: AMBER, wireframe: true, transparent: true, opacity: 0.22 });
+
+  // ---- 02 · LATTICE — skills (z −78, left) ----
+  const lattice = new THREE.Group();
+  for (let ix = 0; ix < 4; ix++) for (let iy = 0; iy < 3; iy++) for (let iz = 0; iz < 3; iz++) {
+    const amber = (ix + iy + iz) % 5 === 0;
+    const cube = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.5, 1.5), amber ? wAmber : wCyan);
+    cube.position.set((ix - 1.5) * 2.4, (iy - 1) * 2.4, (iz - 1) * 2.4);
+    lattice.add(cube);
+  }
+  lattice.position.set(-10, 3, -78);
+  scene.add(lattice);
+
+  // ---- 03 · MISSION NODES — experience (z −118, right) ----
+  const nodes = new THREE.Group();
+  {
+    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(-9, 0, 0), new THREE.Vector3(9, 0, 0),
+    ]);
+    nodes.add(new THREE.Line(lineGeo, new THREE.LineBasicMaterial({
+      color: CYAN, transparent: true, opacity: 0.4,
+    })));
+    for (let i = 0; i < 4; i++) {
+      const oct = new THREE.Mesh(
+        new THREE.OctahedronGeometry(0.9 + (3 - i) * 0.18, 0),
+        i === 0 ? wAmber : wCyan
+      );
+      oct.position.x = -6.6 + i * 4.4;
+      nodes.add(oct);
+    }
+  }
+  nodes.position.set(10, 2.5, -118);
+  scene.add(nodes);
+
+  // ---- 04 · CONSTELLATION — projects fly-through (z −145 … −180) ----
+  const field = [];
+  const FIELD_N = MOBILE ? 8 : 16;
+  for (let i = 0; i < FIELD_N; i++) {
+    const geo = i % 2 ? new THREE.TetrahedronGeometry(1.1 + Math.random() * 1.2, 0)
+                      : new THREE.OctahedronGeometry(0.9 + Math.random() * 1.1, 0);
+    const mesh = new THREE.Mesh(geo, i % 4 === 0 ? wAmber : (i % 3 === 0 ? wDeep : wCyan));
+    mesh.position.set(
+      (Math.random() - 0.5) * 34,
+      Math.random() * 12 - 2,
+      -145 - Math.random() * 36
+    );
+    scene.add(mesh);
+    field.push({ mesh, rx: 0.1 + Math.random() * 0.25, ry: 0.1 + Math.random() * 0.25 });
+  }
+
+  // ---- 05 · STACK — education (z −208, left) ----
+  const stack = new THREE.Group();
+  [[7, 0], [5.2, 1.6], [3.4, 3.2]].forEach(([w, y], i) => {
+    const slab = new THREE.Mesh(new THREE.BoxGeometry(w, 0.7, w * 0.7), i === 1 ? wAmber : wCyan);
+    slab.position.y = y;
+    stack.add(slab);
+  });
+  const orbiter = new THREE.Mesh(new THREE.SphereGeometry(0.4, 10, 10), wAmber);
+  stack.add(orbiter);
+  stack.position.set(-9, -1, -208);
+  scene.add(stack);
+
+  // ---- 06 · BEACON — contact (z −248, center) ----
+  const beacon = new THREE.Group();
+  const pylon = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 1.1, 24, 8, 6, true), wCyan);
+  pylon.position.y = 5;
+  beacon.add(pylon);
+  const bRing1 = new THREE.Mesh(new THREE.TorusGeometry(5, 0.06, 10, 80),
+    new THREE.MeshBasicMaterial({ color: CYAN, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending, depthWrite: false }));
+  bRing1.rotation.x = Math.PI / 2;
+  bRing1.position.y = 4;
+  const bRing2 = new THREE.Mesh(new THREE.TorusGeometry(7.2, 0.05, 10, 80),
+    new THREE.MeshBasicMaterial({ color: AMBER, transparent: true, opacity: 0.18, blending: THREE.AdditiveBlending, depthWrite: false }));
+  bRing2.rotation.x = Math.PI / 2;
+  bRing2.position.y = 9;
+  beacon.add(bRing1, bRing2);
+  beacon.position.set(0, -2, -248);
+  scene.add(beacon);
+
+  // ---- Ambient particles along the whole corridor ----
+  const PC = MOBILE ? 350 : 900;
   const pArr = new Float32Array(PC * 3);
   for (let i = 0; i < PC; i++) {
-    pArr[i * 3]     = (Math.random() - 0.5) * 130;
-    pArr[i * 3 + 1] = (Math.random() - 0.5) * 80;
-    pArr[i * 3 + 2] = (Math.random() - 0.5) * 90 - 10;
+    pArr[i * 3]     = (Math.random() - 0.5) * 120;
+    pArr[i * 3 + 1] = (Math.random() - 0.5) * 60 + 8;
+    pArr[i * 3 + 2] = 25 - Math.random() * 300;
   }
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pArr, 3));
@@ -341,29 +435,44 @@ function initScene3D(opts) {
   function render() {
     const t = clock.getElapsedTime();
 
-    globe.rotation.y = rig.gYr + t * 0.055;
+    // 01 globe
+    globe.rotation.y = t * 0.055;
     globe.rotation.x = Math.sin(t * 0.08) * 0.05;
-    globe.position.x = rig.gX;
-    globe.scale.setScalar(rig.scale);
     core.rotation.y = -t * 0.18;
     core.rotation.x = t * 0.1;
-
     ring1.rotation.y = t * 0.09;
     ring2.rotation.y = -t * 0.065;
     ring3.rotation.y = t * 0.04;
-
     arcs.forEach(a => {
       a.mat.opacity = Math.max(0, Math.sin(t * a.speed + a.phase)) * 0.55 * rig.arcGlow;
     });
 
-    particles.rotation.y = t * 0.006;
+    // 02–06 monuments
+    lattice.rotation.y = t * 0.08;
+    nodes.rotation.y = Math.sin(t * 0.14) * 0.12;
+    nodes.children.forEach((c, i) => {
+      if (c.isMesh) c.rotation.y = t * (0.2 + i * 0.04);
+    });
+    field.forEach(f => {
+      f.mesh.rotation.x = t * f.rx;
+      f.mesh.rotation.y = t * f.ry;
+    });
+    stack.rotation.y = t * 0.06;
+    orbiter.position.set(Math.cos(t * 0.5) * 5.4, 1.8 + Math.sin(t * 0.9) * 1.4, Math.sin(t * 0.5) * 5.4);
+    bRing1.rotation.z = t * 0.25;
+    bRing2.rotation.z = -t * 0.18;
+    const pulse = 0.5 + Math.sin(t * 1.6) * 0.5;
+    bRing1.material.opacity = 0.12 + rig.beacon * pulse * 0.5;
+    bRing2.material.opacity = 0.08 + rig.beacon * pulse * 0.32;
+    bRing1.scale.setScalar(1 + rig.beacon * pulse * 0.25);
 
+    particles.rotation.y = t * 0.004;
+
+    // camera dolly
     smx += (tx - smx) * 0.045;
     smy += (ty - smy) * 0.045;
-    camera.position.x = rig.camX + smx * 1.4;
-    camera.position.y = rig.camY - smy * 1.0;
-    camera.position.z = rig.camZ;
-    camera.lookAt(rig.gX * 0.35, 0, -4);
+    camera.position.set(rig.x + smx * 1.4, rig.y - smy * 1.0, rig.z);
+    camera.lookAt(rig.x * 0.4 + rig.sway, rig.y - 0.6, rig.z - 20);
 
     renderer.render(scene, camera);
   }
@@ -379,7 +488,7 @@ function initScene3D(opts) {
 }
 
 /* ================================================================
-   CAMERA RIG — scroll-driven scene choreography
+   CAMERA RIG — one continuous dolly through the corridor
    ================================================================ */
 function initCameraRig() {
   const tl = gsap.timeline({
@@ -387,17 +496,21 @@ function initCameraRig() {
       trigger: document.body,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 2.2,
+      scrub: 2.4,
     },
   });
-  // hero → identity: globe slides center, camera pushes in
-  tl.to(rig, { gX: 0, camZ: 21, scale: 1.12, gYr: 1.2, ease: 'none' }, 0)
-    // identity → arsenal/log: globe drifts left, pulls back
-    .to(rig, { gX: -8.5, camZ: 25, scale: 1, gYr: 2.6, ease: 'none' }, 1)
-    // log → deployments: globe recedes deep, arcs calm
-    .to(rig, { gX: 0, camZ: 38, scale: 0.72, gYr: 4.2, arcGlow: 0.4, ease: 'none' }, 2)
-    // deployments → transmit: dramatic close-up, arcs surge
-    .to(rig, { camZ: 14.5, camY: 0.4, scale: 1.35, gYr: 6, arcGlow: 1.6, ease: 'none' }, 3);
+  // hero → about: pass the globe on the right
+  tl.to(rig, { z: -34,  x: -3.5, sway: 2.5, ease: 'none' }, 0)
+    // about → skills: lattice emerges on the left
+    .to(rig, { z: -74,  x: 4,    sway: -3,  ease: 'none' }, 1)
+    // skills → experience: mission nodes on the right
+    .to(rig, { z: -114, x: -4,   sway: 3,   ease: 'none' }, 2)
+    // experience → projects: straight through the constellation
+    .to(rig, { z: -158, x: 0,    sway: 0,   y: 3.5, arcGlow: 0.4, ease: 'none' }, 3)
+    // projects → education: stack on the left
+    .to(rig, { z: -204, x: 4,    sway: -3,  y: 2,   ease: 'none' }, 4)
+    // education → contact: approach the beacon head-on
+    .to(rig, { z: -240, x: 0,    sway: 0,   y: 2.8, beacon: 1, arcGlow: 1.5, ease: 'none' }, 5);
 }
 
 /* ================================================================
@@ -525,7 +638,12 @@ function initCounters() {
 function initHorizontalScroll() {
   const track = document.getElementById('deploys-track');
   if (!track) return;
-  requestAnimationFrame(() => {
+  // Arm once layout is settled. document.fonts.ready resolves even in hidden
+  // tabs, unlike requestAnimationFrame — a background-tab load must still pin.
+  let armed = false;
+  const arm = () => {
+    if (armed) return;
+    armed = true;
     const distance = track.scrollWidth - window.innerWidth;
     if (distance <= 0) return;
     const horizontalTween = gsap.to(track, {
@@ -551,7 +669,13 @@ function initHorizontalScroll() {
         },
       });
     });
-  });
+    ScrollTrigger.refresh();
+  };
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => setTimeout(arm, 0));
+  } else {
+    requestAnimationFrame(arm);
+  }
 }
 
 /* ================================================================
